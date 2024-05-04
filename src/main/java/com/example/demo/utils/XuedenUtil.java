@@ -2,10 +2,6 @@ package com.example.demo.utils;
 
 public class XuedenUtil {
 
-    /**
-     * 随机生成六位数
-     * @return
-     */
    public  static int randomSixNums(){
        int code = (int) ((Math.random()*9+1)*100000);
        return code;

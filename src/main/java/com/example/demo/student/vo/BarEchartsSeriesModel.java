@@ -10,4 +10,5 @@ public class BarEchartsSeriesModel {
     private List<Double> data;
     private String type;
     private String name;
+    private Object Label;
 }

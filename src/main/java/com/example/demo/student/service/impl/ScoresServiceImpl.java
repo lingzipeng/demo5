@@ -354,6 +354,7 @@ public class ScoresServiceImpl implements IScoresService {
         countBarEchartsSeriesModel.setName("总人数");
         barEchartsSeriesList.add(countBarEchartsSeriesModel);
 
+
         // 定义返回对象
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("categoryList", categoryList);
@@ -378,6 +379,9 @@ public class ScoresServiceImpl implements IScoresService {
                 //学生id
                 if (scoresList.get(i).getStudent().getId() == j) {
                     student.put(scoresList.get(i).getCourse().getCoursename(), scoresList.get(i).getScore());
+                    student.put(scoresList.get(i).getCourse().getCoursename()+"基础", scoresList.get(i).getBaseScore());
+                    student.put(scoresList.get(i).getCourse().getCoursename()+"重难点", scoresList.get(i).getDifficultScore());
+                    student.put("上次"+scoresList.get(i).getCourse().getCoursename(), scoresList.get(i).getOldScore());
                     if (!student.containsKey("name")) {
                         // 当键 "name" 不存在时，执行 put 操作
                         student.put("name", scoresList.get(i).getStudent().getName());
@@ -401,5 +405,13 @@ public class ScoresServiceImpl implements IScoresService {
         }
 //        resultMap.put(1 + "",scoresList);
         return resultMap;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void editLastScores(Scores scores) {
+        Scores dbScores = scoresRepository.getReferenceById(scores.getId());
+        BeanUtil.copyProperties(scores, dbScores, CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
+        scoresRepository.save(dbScores);
     }
 }

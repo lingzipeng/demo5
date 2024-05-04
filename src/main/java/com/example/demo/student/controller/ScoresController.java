@@ -62,6 +62,16 @@ public class ScoresController {
         scoresService.editScores(scores);
         return BaseResult.success("更新成功");
     }
+    /**
+     * 更新上次成绩
+     * @param
+     * @return
+     */
+    @PutMapping("oldScore")
+    public BaseResult editLastScores(@RequestBody Scores scores){
+        scoresService.editLastScores(scores);
+        return BaseResult.success("更新成功");
+    }
 
     /**
      * 根据ID删除成绩信息
@@ -108,7 +118,5 @@ public class ScoresController {
     public BaseResult allScoresCensus(){
         return BaseResult.success(scoresService.allScoresCensus());
     }
-
-
 
 }

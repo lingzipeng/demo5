@@ -67,4 +67,6 @@ public interface IScoresService {
      * @return
      */
     HashMap<String, Object> allScoresCensus();
+
+    void editLastScores(Scores scores);
 }

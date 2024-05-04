@@ -49,5 +49,22 @@ public class Scores extends BaseEntity {
     @Column(name = "type")
     public String type;
 
+    /**
+     * 学生之前成绩
+     */
+    @Column(name = "oldScore")
+    private float oldScore;
+
+    /**
+     * 学生基础成绩
+     */
+    @Column(name = "baseScore")
+    private float baseScore;
+
+    /**
+     * 学生重难点成绩
+     */
+    @Column(name = "difficultScore")
+    private float difficultScore;
 
 }

@@ -9,6 +9,7 @@ import com.example.demo.student.service.IInvestigationService;
 import com.example.demo.student.service.dto.InvestigationQueryCriteria;
 import com.example.demo.utils.PageVo;
 import com.example.demo.utils.ResultVo;
+import com.example.demo.utils.ResultVoPlus;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -105,10 +106,12 @@ public class InvestigationController {
     @GetMapping(value = "/all")
     public BaseResult getAll(){
         List<SysInvestigation> list =  investigationService.queryAll();
-        List<ResultVo> result = list.stream().map(temp -> {
-            ResultVo obj = new ResultVo();
+        List<ResultVoPlus> result = list.stream().map(temp -> {
+            ResultVoPlus obj = new ResultVoPlus();
             obj.setName(temp.getName());
             obj.setId(temp.getId());
+            obj.setRemarks(temp.getRemarks());
+            obj.setRating(Double.parseDouble(temp.getRating()));
             return obj;
         }).collect(Collectors.toList());
         return BaseResult.success(result);
